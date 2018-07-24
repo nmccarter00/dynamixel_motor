@@ -125,7 +125,7 @@ class JointPositionController(JointController):
                 direction_flag = 0x0400
                 spd_rad = -spd_rad
             if spd_rad > self.joint_max_speed: spd_rad = self.joint_max_speed
-            return direction_flag | int(round(spd_rad / self.VELOCITY_PER_TICK))
+            return final_speed = direction_flag | int(round(spd_rad / self.VELOCITY_PER_TICK))
         else:
             if spd_rad < self.MIN_VELOCITY: spd_rad = self.MIN_VELOCITY # In Endless Mode, Minimum speed is zero
             elif spd_rad > self.joint_max_speed: spd_rad = self.joint_max_speed
@@ -193,3 +193,6 @@ class JointPositionController(JointController):
         mcv = (self.motor_id, self.pos_rad_to_raw(angle))
         self.dxl_io.set_multi_position([mcv])
 
+    def stop(self):
+        self.set_speed(0.0)
+        super(JointPositionController, self).stop()

@@ -132,6 +132,11 @@ class ControllerManager:
         if self.diagnostics_rate > 0: Thread(target=self.diagnostics_processor).start()
 
     def on_shutdown(self):
+	for controller_name in self.controllers.keys():
+		print("Stopping controller: ", controller_name)
+		req =  StopController()
+		req.controller_name = controller_name
+                self.stop_controller(req)
         for serial_proxy in self.serial_proxies.values():
             serial_proxy.disconnect()
 

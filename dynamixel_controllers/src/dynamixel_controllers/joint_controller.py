@@ -58,7 +58,7 @@ from std_msgs.msg import Float64
 from dynamixel_msgs.msg import MotorStateList
 from dynamixel_msgs.msg import JointState
 
-class JointController:
+class JointController(object):
     def __init__(self, dxl_io, controller_namespace, port_namespace):
         self.running = False
         self.dxl_io = dxl_io
