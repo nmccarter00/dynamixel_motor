@@ -125,7 +125,7 @@ class JointPositionController(JointController):
                 direction_flag = 0x0400
                 spd_rad = -spd_rad
             if spd_rad > self.joint_max_speed: spd_rad = self.joint_max_speed
-            return final_speed = direction_flag | int(round(spd_rad / self.VELOCITY_PER_TICK))
+            return direction_flag | int(round(spd_rad / self.VELOCITY_PER_TICK))
         else:
             if spd_rad < self.MIN_VELOCITY: spd_rad = self.MIN_VELOCITY # In Endless Mode, Minimum speed is zero
             elif spd_rad > self.joint_max_speed: spd_rad = self.joint_max_speed
